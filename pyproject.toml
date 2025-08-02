@@ -1,0 +1,48 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "house_prices_ml"
+version = "0.0.1"
+description = ""
+authors = [
+  { name = "Andrian Lloyd Maagma" },
+]
+
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "ipython",
+    "jupyterlab",
+    "loguru",
+    "matplotlib",
+    "notebook",
+    "numpy",
+    "pandas",
+    "pip",
+    "pytest",
+    "python-dotenv",
+    "ruff",
+    "scikit-learn",
+    "tqdm",
+    "typer",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "xgboost (>=3.0.3,<4.0.0)",
+]
+requires-python = "~=3.10.0"
+
+[tool.ruff]
+line-length = 99
+src = ["house_prices_ml"]
+include = ["pyproject.toml", "house_prices_ml/**/*.py"]
+
+[tool.ruff.lint]
+extend-select = ["I"]  # Add import sorting
+
+[tool.ruff.lint.isort]
+known-first-party = ["house_prices_ml"]
+force-sort-within-sections = true
+
