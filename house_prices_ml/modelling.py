@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import randint, uniform
 from sklearn.compose import TransformedTargetRegressor
+from sklearn.metrics import mean_squared_log_error
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 
@@ -45,3 +46,9 @@ def tune_hyperparameters(pipeline, X, y, verbose=1):
     search.fit(X, y)
 
     return search
+
+
+def evaluate_model(y_true, y_pred):
+    y_true = np.maximum(0, y_true)
+    y_pred = np.maximum(0, y_pred)
+    return np.sqrt(mean_squared_log_error(y_true, y_pred))

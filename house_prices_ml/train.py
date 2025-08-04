@@ -1,13 +1,12 @@
 import joblib
 from loguru import logger
 import pandas as pd
-from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import typer
 from xgboost import XGBRegressor
 
 from house_prices_ml.config import MODELS_DIR, RAW_DATA_DIR, TARGET
-from house_prices_ml.modelling import build_pipeline, tune_hyperparameters
+from house_prices_ml.modelling import build_pipeline, evaluate_model, tune_hyperparameters
 
 app = typer.Typer()
 
@@ -37,8 +36,8 @@ def train_model():
     y_train_pred = best_model.predict(X_train)
     y_val_pred = best_model.predict(X_val)
 
-    train_mse = mean_squared_error(y_train, y_train_pred)
-    val_mse = mean_squared_error(y_val, y_val_pred)
+    train_mse = evaluate_model(y_train, y_train_pred)
+    val_mse = evaluate_model(y_val, y_val_pred)
 
     logger.info(f"Train MSE: {train_mse:,.2f}")
     logger.info(f"Validation MSE: {val_mse:,.2f}")
